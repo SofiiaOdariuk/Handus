@@ -20,5 +20,5 @@ public abstract class Level // abstract class for all levels
     public List<Sprite> GetSprites() => sprites;
     public Vector2f GetSpawnPoint() => spawnPoint;
     public Sprite GetBackground() => background;
-    public void Update() { }
+    public void Update(float dt) { }
 }

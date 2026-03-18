@@ -1,4 +1,7 @@
-﻿namespace Handus;
+﻿using SFML.System;
+using SFML.Window;
+
+namespace Handus;
 
 using SFML.Graphics;
 public class Engine
@@ -16,16 +19,17 @@ public class Engine
         
         var texture = new Texture("Files/player.jpg");
         textures.Add("idle1", texture);
-
         player = new Player(textures, level.GetSpawnPoint());
+        
+        window.Closed += (sender, e) => window.Close();
     }
     
-    void Update()
+    void Update(float dt)
     {
         window.DispatchEvents();
-        window.Closed += (sender, e) => window.Close();
-        player.Update();
-        level.Update();
+        if (Keyboard.IsKeyPressed(Keyboard.Key.Escape)) window.Close();
+        player.Update(dt);
+        level.Update(dt);
     }
 
     void Render()   // draws all sprites
@@ -38,9 +42,14 @@ public class Engine
     
     public void Loop()  // launches the game's loop
     {
+        var clock = new Clock();
+        
+        
         while (window.IsOpen)   // TODO: delta time
         {
-            Update();
+            float dt = clock.Restart().AsSeconds();
+            
+            Update(dt);
             Render();
         }
     }
