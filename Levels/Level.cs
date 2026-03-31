@@ -8,7 +8,7 @@ public abstract class Level // abstract class for all levels
 {
     protected List<Texture> textures = new();
     protected List<Sprite> sprites = new();
-    protected List<FloatRect> hitboxes = new();
+    protected List<IntRect> hitboxes = new();
     protected Sprite background;
     protected Vector2f spawnPoint;
     protected Vector2u dimensions;
@@ -18,6 +18,7 @@ public abstract class Level // abstract class for all levels
         this.dimensions = dimensions;
     }
     public List<Sprite> GetSprites() => sprites;
+    public List<IntRect> GetHitboxes() => hitboxes;
     public Vector2f GetSpawnPoint() => spawnPoint;
     public Sprite GetBackground() => background;
     public void Update(float dt) { }
